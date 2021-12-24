@@ -1,11 +1,13 @@
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
+import css from 'rollup-plugin-import-css';
 import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 
 // this override is needed because Module format cjs does not support top-level await
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const packageJson = require('./package.json');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const basePackage = require('../../package.json');
 
 export default {
@@ -24,6 +26,7 @@ export default {
   ],
   plugins: [
     resolve(),
+    css(),
     typescript({
       useTsconfigDeclarationDir: true,
       tsconfigOverride: {
