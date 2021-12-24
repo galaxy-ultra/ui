@@ -24,8 +24,8 @@
     "clean": "rm -rf lib"
   },
   "dependencies": {
-    "@galaxy-ultra/button": "*",
-    "@galaxy-ultra/modal": "*"
+    "@galaxy-ultra/button": "^0.0.2",
+    "@galaxy-ultra/modal": "^0.0.2"
   },
   "devDependencies": {
     "@types/react-dom": "^17.0.7"
