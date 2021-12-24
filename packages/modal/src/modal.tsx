@@ -1,5 +1,5 @@
 import { memo, RefObject, useEffect, useRef, useState } from 'react';
-import { getClass, getElementType } from '../utils/helper';
+import { getClass, getElementType } from './helper';
 import './modal.css';
 import { ModalFooterProps, ModalHeaderProps, ModalProps } from './modal.type';
 

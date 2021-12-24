@@ -1,5 +1,5 @@
-import { getClass } from '../utils/getClass';
 import { ButtonProps } from './button.type';
+import { getClass } from './helper';
 
 export const Button: React.FC<ButtonProps> = (props) => {
   const { variant = 'primary', children } = props;
