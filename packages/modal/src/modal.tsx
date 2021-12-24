@@ -54,13 +54,13 @@ const ModalFooter: React.FC<ModalFooterProps> = memo((props) => {
         <div className="mt-4">
           <div className="flex items-center justify-end">
             <button
-              className="px-4 font-medium py-2 duration-300 outline-none rounded bg-white hover:bg-gray-50 border border-gray-200"
+              className="px-4 font-medium py-2 duration-300 outline-none rounded-md bg-white hover:bg-gray-50 border border-gray-300"
               onClick={onClose}
             >
               Cancel
             </button>
             <button
-              className="px-4 font-medium py-2 duration-300 outline-none rounded bg-blue-600 hover:bg-blue-700 text-gray-50 ml-4"
+              className="px-4 font-medium py-2 duration-300 outline-none rounded-md bg-blue-600 hover:bg-blue-700 text-gray-50 ml-4"
               onClick={onConfirm}
             >
               Confirm
@@ -81,7 +81,8 @@ const ModalFooter: React.FC<ModalFooterProps> = memo((props) => {
 
 export const Modal: React.FC<ModalProps> = (props) => {
   const {
-    // show,
+    show,
+    onClose,
     size = 'md',
     children,
     zIndex = 100,
@@ -93,15 +94,18 @@ export const Modal: React.FC<ModalProps> = (props) => {
     showFooter = true,
     showHeader = true,
   } = props;
-  const [show, setShow] = useState<boolean>(false);
+
+  const [firstRender, setFirstRender] = useState<boolean>(true);
 
   const modalRef = useRef<HTMLDivElement>(null);
+  const bgModalRef = useRef<HTMLDivElement>(null);
 
   const useOutsideElement = (ref: RefObject<HTMLDivElement>) => {
     useEffect(() => {
       const onClickOutside = (event: any) => {
-        if (ref.current && !ref.current.contains(event.target)) {
-          setShow(false);
+        if (ref.current && !ref.current.contains(event.target) && !firstRender) {
+          setFirstRender(false);
+          onClose();
         }
       };
       document.addEventListener('mousedown', onClickOutside);
@@ -111,47 +115,64 @@ export const Modal: React.FC<ModalProps> = (props) => {
     }, [ref]);
   };
 
-  // useOutsideElement(modalRef);
+  useOutsideElement(modalRef);
+
+  useEffect(() => {
+    if (show && firstRender) {
+      setFirstRender(false);
+    }
+  }, [show, firstRender]);
 
   return (
-    <div>
-      <button className="outline-none" onClick={() => setShow(true)}>
-        Open modal
-      </button>
-
+    <div
+      style={{ zIndex: zIndex }}
+      ref={bgModalRef}
+      className={getClass({
+        'flex justify-center fixed w-full min-h-screen inset-0 bg-gray-900 bg-opacity-50': true,
+        'overflow-hidden': show,
+        'gu-modal-background-hide': !show && !firstRender,
+        hidden: firstRender,
+        'items-center': position === 'center',
+        'items-start pt-5': position === 'top',
+      })}
+    >
       <div
-        style={{ zIndex: zIndex }}
+        style={{ zIndex: zIndex + 10 }}
+        ref={modalRef}
         className={getClass({
-          'bg-gray-900 bg-opacity-50 inset-0 fixed flex justify-center overflow-hidden': show,
-          'items-center': position === 'center',
-          'items-start pt-5': position === 'top',
+          'duration-300 px-5 py-4 rounded-lg shadow-xl bg-white': true,
+          'gu-modal-content-show': show,
+          'gu-modal-content-hide': !show,
+          'w-4/12': size === 'sm',
+          'w-5/12': size === 'md',
+          'w-6/12': size === 'lg',
+          'w-9/12': size === 'xl',
         })}
       >
-        <div
-          style={{ zIndex: zIndex + 1 }}
-          ref={modalRef}
-          className={getClass({
-            'duration-300': true,
-            'gla-modal-div-show bg-white rounded-lg shadow-xl px-5 py-4': show,
-            'gla-modal-div-hide': !show,
-            // hidden: !show,
-            'w-4/12': size === 'sm',
-            'w-5/12': size === 'md',
-            'w-6/12': size === 'lg',
-            'w-9/12': size === 'xl',
-          })}
-        >
-          <ModalHeader
-            onClose={() => setShow(false)}
-            header={header}
-            closeButton={closeButton}
-            showHeader={showHeader}
-          />
+        <ModalHeader
+          onClose={() => {
+            setFirstRender(false);
+            onClose();
+          }}
+          header={header}
+          closeButton={closeButton}
+          showHeader={showHeader}
+        />
 
-          <div className="my-4">{children}</div>
+        <div className="my-4">{children}</div>
 
-          <ModalFooter footer={footer} onClose={() => setShow(false)} onConfirm={onConfirm} showFooter={showFooter} />
-        </div>
+        <ModalFooter
+          footer={footer}
+          onClose={() => {
+            setFirstRender(false);
+            onClose();
+          }}
+          onConfirm={() => {
+            setFirstRender(false);
+            onConfirm && onConfirm();
+          }}
+          showFooter={showFooter}
+        />
       </div>
     </div>
   );

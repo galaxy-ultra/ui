@@ -2,6 +2,7 @@ export type ModalSize = 'sm' | 'md' | 'lg' | 'xl';
 
 export interface ModalProps {
   show: boolean;
+  onClose: () => void;
   header?: JSX.Element | string;
   footer?: JSX.Element | string;
   showHeader?: boolean;

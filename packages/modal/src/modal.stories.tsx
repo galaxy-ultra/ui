@@ -1,18 +1,27 @@
 import { Meta, Story } from '@storybook/react';
-import { ComponentProps } from 'react';
+import { ComponentProps, useState } from 'react';
 import { Modal } from './modal';
+import { ModalProps } from './modal.type';
 
 export default {
   title: 'Modal',
   component: Modal,
 } as Meta;
 
-const ModalComponent: Story<ComponentProps<typeof Modal>> = (args: any) => <Modal {...args} />;
+const ModalComponent: Story<ComponentProps<typeof Modal>> = (args: ModalProps) => {
+  const [show, setShow] = useState<boolean>(false)
+
+  return (
+    <div>
+      <button onClick={() => setShow(true)} className='px-4 py-2 rounded text-gray-50 bg-green-600 duration-300 hover:bg-green-700'>Open modal</button>
+      <Modal {...args} show={show} onClose={() => setShow(false)} />
+    </div>
+  )
+};
 
 export const PrimaryModal = ModalComponent.bind({});
 PrimaryModal.storyName = 'Size MD';
 PrimaryModal.args = {
-  show: false,
   children: 'Primary Modal',
   size: 'lg',
   header: 'Modal Title',

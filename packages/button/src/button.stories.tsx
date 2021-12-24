@@ -1,13 +1,14 @@
 import { Meta, Story } from '@storybook/react';
 import { ComponentProps } from 'react';
 import { Button } from './button';
+import { ButtonProps } from './button.type';
 
 export default {
   title: 'Button',
   component: Button,
 } as Meta;
 
-const ButtonComponent: Story<ComponentProps<typeof Button>> = (args: any) => <Button {...args} />;
+const ButtonComponent: Story<ComponentProps<typeof Button>> = (args: ButtonProps) => <Button {...args} />;
 
 export const PrimaryButton = ButtonComponent.bind({});
 PrimaryButton.storyName = 'Primary';

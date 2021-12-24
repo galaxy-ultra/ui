@@ -1,19 +1,26 @@
-@keyframes show-bg-modal {
-  from{ opacity: 0; transform: scale(0.95); visibility: hidden; display: none; }
-  to{ opacity: 1; transform: scale(1); visibility: visible; display: block; }
+@keyframes show-modal-content {
+  from { opacity: 0; visibility: hidden; transform: scale(0.95);}
+  to { opacity: 1; visibility: visible; transform: scale(1);}
 }
 
-@keyframes hide-bg-modal {
-  from{ opacity: 1; transform: scale(1); visibility: visible; display: block; }
-  to{ opacity: 0; transform: scale(0.95); visibility: hidden; display: none; }
+@keyframes hide-modal-content {
+  from { opacity: 1; visibility: visible; transform: scale(1);}
+  to { opacity: 0; visibility: hidden; transform: scale(0.95);}
 }
 
-.gla-modal-div-show {
-  animation: show-bg-modal 0.2 ease-out forwards;
-  display: block;
+@keyframes hide-modal-background {
+  from { opacity: 1; visibility: visible; }
+  to { opacity: 0; visibility: hidden; }
 }
 
-.gla-modal-div-hide {
-  animation: hide-bg-modal 0.2 ease-in forwards;
-  display: none;
+.gu-modal-content-show {
+  animation: show-modal-content 0.2s ease-out forwards;
+}
+
+.gu-modal-content-hide {
+  animation: hide-modal-content 0.2s ease-in forwards;
+}
+
+.gu-modal-background-hide {
+  animation: hide-modal-background 0.2s ease-in forwards;
 }
