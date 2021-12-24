@@ -17,4 +17,5 @@ jobs:
       - run: yarn bootstrap
       - run: cd packages/stories && npm run deploy-storybook -- --ci
         env:
-          GH_TOKEN: ${{ github.actor }}:${{ secrets.GH_TOKEN }}
+          # GH_TOKEN: ${{ github.actor }}:${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
