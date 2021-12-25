@@ -12,6 +12,9 @@ export interface ModalProps {
   zIndex?: number;
   position?: 'center' | 'top';
   onConfirm?: () => void;
+  closeOutside?: boolean;
+  cancelTitle?: string;
+  confirmTitle?: string;
 }
 
 export interface ModalHeaderProps {
@@ -26,4 +29,6 @@ export interface ModalFooterProps {
   onConfirm?: () => void;
   onClose?: () => void;
   showFooter?: boolean;
+  cancelTitle?: string;
+  confirmTitle?: string;
 }

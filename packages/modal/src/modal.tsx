@@ -41,7 +41,7 @@ const ModalHeader: React.FC<ModalHeaderProps> = memo((props) => {
 });
 
 const ModalFooter: React.FC<ModalFooterProps> = memo((props) => {
-  const { footer, onConfirm, onClose, showFooter } = props;
+  const { footer, onConfirm, onClose, showFooter, cancelTitle, confirmTitle } = props;
 
   if (!showFooter) {
     return null;
@@ -57,13 +57,13 @@ const ModalFooter: React.FC<ModalFooterProps> = memo((props) => {
               className="px-4 font-medium py-2 duration-300 outline-none rounded-md bg-white hover:bg-gray-50 border border-gray-300"
               onClick={onClose}
             >
-              Cancel
+              {cancelTitle || 'Cancel'}
             </button>
             <button
               className="px-4 font-medium py-2 duration-300 outline-none rounded-md bg-blue-600 hover:bg-blue-700 text-gray-50 ml-4"
               onClick={onConfirm}
             >
-              Confirm
+              {confirmTitle || 'Confirm'}
             </button>
           </div>
         </div>
@@ -93,17 +93,19 @@ export const Modal: React.FC<ModalProps> = (props) => {
     onConfirm,
     showFooter = true,
     showHeader = true,
+    closeOutside = false,
+    cancelTitle,
+    confirmTitle,
   } = props;
 
   const [firstRender, setFirstRender] = useState<boolean>(true);
-
   const modalRef = useRef<HTMLDivElement>(null);
   const bgModalRef = useRef<HTMLDivElement>(null);
 
-  const useOutsideElement = (ref: RefObject<HTMLDivElement>) => {
+  const useOutsideElement = (ref: RefObject<HTMLDivElement>, isFirst: boolean, closeOutside: boolean) => {
     useEffect(() => {
       const onClickOutside = (event: any) => {
-        if (ref.current && !ref.current.contains(event.target) && !firstRender) {
+        if (ref.current && !ref.current.contains(event.target) && !isFirst && closeOutside) {
           setFirstRender(false);
           onClose();
         }
@@ -112,10 +114,10 @@ export const Modal: React.FC<ModalProps> = (props) => {
       return () => {
         document.removeEventListener('mousedown', onClickOutside);
       };
-    }, [ref]);
+    }, [ref, isFirst, closeOutside]);
   };
 
-  useOutsideElement(modalRef);
+  useOutsideElement(modalRef, firstRender, closeOutside);
 
   useEffect(() => {
     if (show && firstRender) {
@@ -129,11 +131,11 @@ export const Modal: React.FC<ModalProps> = (props) => {
       ref={bgModalRef}
       className={getClass({
         'flex justify-center fixed w-full min-h-screen inset-0 bg-gray-900 bg-opacity-50': true,
-        'overflow-hidden': show,
+        'overflow-y-auto pb-10': show,
         'gu-modal-background-hide': !show && !firstRender,
         hidden: firstRender,
         'items-center': position === 'center',
-        'items-start pt-5': position === 'top',
+        'items-start pt-7': position === 'top',
       })}
     >
       <div
@@ -143,10 +145,10 @@ export const Modal: React.FC<ModalProps> = (props) => {
           'duration-300 px-5 py-4 rounded-lg shadow-xl bg-white': true,
           'gu-modal-content-show': show,
           'gu-modal-content-hide': !show,
-          'w-4/12': size === 'sm',
-          'w-5/12': size === 'md',
-          'w-6/12': size === 'lg',
-          'w-9/12': size === 'xl',
+          'w-11/12 sm:w-6/12 md:w-6/12 lg:w-4/12 xl:w-4/12 2xl:w-4/12': size === 'sm',
+          'w-11/12 sm:w-8/12 md:w-6/12 lg:w-5/12 xl:w-5/12 2xl:w-5/12': size === 'md',
+          'w-11/12 sm:w-9/12 md:w-7/12 lg:w-6/12 xl:w-6/12 2xl:w-6/12': size === 'lg',
+          'w-11/12 sm:w-11/12 md:w-11/12 lg:w-10/12 xl:w-10/12 2xl:w-9/12': size === 'xl',
         })}
       >
         <ModalHeader
@@ -172,6 +174,8 @@ export const Modal: React.FC<ModalProps> = (props) => {
             onConfirm && onConfirm();
           }}
           showFooter={showFooter}
+          confirmTitle={confirmTitle}
+          cancelTitle={cancelTitle}
         />
       </div>
     </div>
