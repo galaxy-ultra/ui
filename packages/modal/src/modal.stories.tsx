@@ -22,8 +22,7 @@ const ModalComponent: Story<ComponentProps<typeof Modal>> = (args: ModalProps) =
 export const PrimaryModal = ModalComponent.bind({});
 PrimaryModal.storyName = 'Size MD';
 PrimaryModal.args = {
-  children: 'Primary Modal',
-  size: 'lg',
+  children: <div className='text-justify'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>,
   header: 'Modal Title',
   closeButton: true,
 };
