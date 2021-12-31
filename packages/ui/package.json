@@ -1,6 +1,6 @@
 {
   "name": "@galaxy-ultra/ui",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Galaxy Ultra UI",
   "author": "autoclickvn@gmail.com",
   "homepage": "",
@@ -24,9 +24,9 @@
     "clean": "rm -rf lib"
   },
   "dependencies": {
-    "@galaxy-ultra/alert": "^0.0.9",
-    "@galaxy-ultra/button": "^0.0.9",
-    "@galaxy-ultra/modal": "^0.0.9"
+    "@galaxy-ultra/alert": "^0.0.10",
+    "@galaxy-ultra/button": "^0.0.10",
+    "@galaxy-ultra/modal": "^0.0.10"
   },
   "devDependencies": {
     "@types/react-dom": "^17.0.7"
