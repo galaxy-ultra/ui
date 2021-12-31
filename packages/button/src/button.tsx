@@ -14,7 +14,7 @@ export const Button: React.FC<ButtonProps> = (props) => {
         'bg-yellow-400 hover:bg-yellow-500': variant === 'warning' && !disabled,
         'bg-teal-600 hover:bg-teal-700 text-gray-50': variant === 'info' && !disabled,
         'bg-gray-700 hover:bg-gray-800 text-gray-50': variant === 'dark' && !disabled,
-        'bg-white hover:bg-gray-50 border border-gray-200': variant === 'cancel' && !disabled,
+        'bg-white hover:bg-gray-50 border border-gray-200': variant === 'light' && !disabled,
         'bg-gray-500 hover:bg-gray-500 cursor-not-allowed text-gray-50': !!disabled,
       })}
     >
