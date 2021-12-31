@@ -52,11 +52,11 @@ DarkButton.args = {
   variant: 'dark',
 };
 
-export const CancelButton = ButtonComponent.bind({});
-CancelButton.storyName = 'Cancel';
-CancelButton.args = {
-  children: 'Cancel Button',
-  variant: 'cancel',
+export const LightButton = ButtonComponent.bind({});
+LightButton.storyName = 'Light';
+LightButton.args = {
+  children: 'Light Button',
+  variant: 'light',
 };
 
 export const DisabledButton = ButtonComponent.bind({});

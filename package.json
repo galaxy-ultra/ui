@@ -50,7 +50,7 @@
     "build": "npx lerna run --parallel build",
     "release": "yarn clean & yarn build && npx lerna publish",
     "new-package": "npx hygen package new",
-    "start": "cd stories yarn run storybook"
+    "start": "cd ./packages/stories && yarn start"
   },
   "eslintIgnore": [
     "node_modules",
