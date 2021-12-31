@@ -29,7 +29,7 @@ const getIcon = (type: string) => {
 };
 
 export const Alert: React.FC<AlertProps> = (props) => {
-  const { type = 'primary', size = 'md', label, content, icon, closeIcon = true, onClose } = props;
+  const { type = 'primary', size = 'md', label, content, icon, closeIcon = false, onClose } = props;
   const [show, setShow] = useState<boolean>(true);
 
   if (!show) {
@@ -49,7 +49,7 @@ export const Alert: React.FC<AlertProps> = (props) => {
       <div className="w-full flex mx-auto">
         <div
           className={getClass({
-            'flex items-center justify-center p-4 bg-blue-500': true,
+            'flex items-center justify-center p-5': true,
             'bg-blue-500': type === 'primary',
             'bg-green-500': type === 'success',
             'bg-red-500': type === 'danger',
