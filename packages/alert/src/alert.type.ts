@@ -10,4 +10,6 @@ export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
   label?: string;
   content?: string | JSX.Element;
   icon?: JSX.Element;
+  closeIcon?: boolean;
+  onClose?: () => void;
 }
