@@ -53,7 +53,7 @@ export const Alert: React.FC<AlertProps> = (props) => {
             'bg-blue-500': type === 'primary',
             'bg-green-500': type === 'success',
             'bg-red-500': type === 'danger',
-            'bg-yellow-500': type === 'warning',
+            'bg-yellow-400': type === 'warning',
             'bg-teal-600': type === 'info',
             'bg-gray-700': type === 'dark',
             'bg-gray-100': type === 'light',
