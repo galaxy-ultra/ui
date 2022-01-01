@@ -1,10 +1,8 @@
-import { HTMLAttributes } from 'react';
-
 export type AlertType = 'primary' | 'success' | 'danger' | 'warning' | 'light' | 'dark' | 'info';
 
 export type AlertSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
-export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
+export interface AlertProps {
   type?: AlertType;
   size?: AlertSize;
   label?: string;
