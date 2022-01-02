@@ -27,7 +27,8 @@
     "@galaxy-ultra/button": "^0.0.8",
     "@galaxy-ultra/modal": "^0.0.8",
     "@galaxy-ultra/alert": "^0.0.8",
-    "@galaxy-ultra/card": "^0.0.8"
+    "@galaxy-ultra/card": "^0.0.8",
+    "@galaxy-ultra/breadcrumb": "^0.0.8"
   },
   "devDependencies": {
     "@types/react-dom": "^17.0.7"
