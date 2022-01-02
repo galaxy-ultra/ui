@@ -24,6 +24,7 @@
     "clean": "rm -rf lib"
   },
   "dependencies": {
+    "@galaxy-ultra/breadcrumb": "^0.0.8",
     "@galaxy-ultra/alert": "^0.0.12",
     "@galaxy-ultra/button": "^0.0.12",
     "@galaxy-ultra/card": "^0.0.12",
