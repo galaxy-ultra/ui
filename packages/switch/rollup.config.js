@@ -1,6 +1,6 @@
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
-import css from 'rollup-plugin-import-css';
+import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 
@@ -26,7 +26,6 @@ export default {
   ],
   plugins: [
     resolve(),
-    css(),
     typescript({
       useTsconfigDeclarationDir: true,
       tsconfigOverride: {
@@ -39,6 +38,9 @@ export default {
       ignoreGlobal: true,
     }),
     terser(),
+    postcss({
+      plugins: [],
+    }),
   ],
   external: [
     ...Object.keys(packageJson.dependencies || {}),

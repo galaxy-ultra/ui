@@ -23,8 +23,5 @@
     "build": "rollup -c",
     "clean": "rm -rf lib",
     "storybook": "start-storybook -p 6006"
-  },
-  "dependencies": {
-    "rollup-plugin-import-css": "^3.0.2"
   }
 }
