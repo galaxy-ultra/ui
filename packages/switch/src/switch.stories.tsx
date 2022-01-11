@@ -18,7 +18,9 @@ SmallComponent.args = {
 
 export const NormalComponent = SwitchComponent.bind({});
 NormalComponent.storyName = 'Normal size';
-NormalComponent.args = {};
+NormalComponent.args = {
+  checked: true
+};
 
 export const LargeComponent = SwitchComponent.bind({});
 LargeComponent.storyName = 'Large size';
@@ -52,5 +54,5 @@ CursorComponent.args = {
 export const DisabledComponent = SwitchComponent.bind({});
 DisabledComponent.storyName = 'Disabled';
 DisabledComponent.args = {
-  disabled: true
+  disabled: true,
 };

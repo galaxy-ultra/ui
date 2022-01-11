@@ -12,8 +12,9 @@ export const Switch: React.FC<SwitchProps> = (props) => {
     unCheckedColor = 'bg-gray-300',
     label,
     cursor = 'pointer',
+    checked = false,
   } = props;
-  const [checked, setChecked] = useState<boolean>(true);
+  const [switchChecked, setSwitchChecked] = useState<boolean>(checked);
 
   return (
     <div
@@ -28,19 +29,19 @@ export const Switch: React.FC<SwitchProps> = (props) => {
             'mb-1': label.position === 'top',
           })}
         >
-          {checked ? label.checked : label.unChecked}
+          {switchChecked ? label.checked : label.unChecked}
         </div>
       )}
 
       <button
         disabled={disabled}
         onClick={() => {
-          setChecked(!checked);
-          onChange && onChange(!checked);
+          setSwitchChecked(!switchChecked);
+          onChange && onChange(!switchChecked);
         }}
         className={
           `${cursor && cursor === 'auto' ? 'cursor-auto' : ''} ` +
-          `${checked ? checkedColor : unCheckedColor} ` +
+          `${switchChecked ? checkedColor : unCheckedColor} ` +
           getClass({
             'flex items-center rounded-full p-1 duration-300': true,
             'w-12 h-7': size === 'small',
@@ -53,9 +54,9 @@ export const Switch: React.FC<SwitchProps> = (props) => {
         <span
           className={getClass({
             'bg-white rounded-full shadow-md transform duration-300': true,
-            'translate-x-5': checked && size === 'small',
-            'translate-x-7': checked && size === 'normal',
-            'translate-x-9': checked && size === 'large',
+            'translate-x-5': switchChecked && size === 'small',
+            'translate-x-7': switchChecked && size === 'normal',
+            'translate-x-9': switchChecked && size === 'large',
             'w-5 h-5': size === 'small',
             'w-6 h-6': size === 'normal',
             'w-7 h-7': size === 'large',
@@ -70,7 +71,7 @@ export const Switch: React.FC<SwitchProps> = (props) => {
             'mt-1': label.position === 'bottom',
           })}
         >
-          {checked ? label.checked : label.unChecked}
+          {switchChecked ? label.checked : label.unChecked}
         </div>
       )}
     </div>
