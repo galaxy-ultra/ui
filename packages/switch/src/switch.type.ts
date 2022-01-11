@@ -1,6 +1,7 @@
 type SwitchSize = 'small' | 'normal' | 'large';
 
 export interface SwitchProps {
+  checked?: boolean;
   size?: SwitchSize;
   disabled?: boolean;
   onChange?: (checked: boolean) => void;
