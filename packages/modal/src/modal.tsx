@@ -130,6 +130,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
 
   useEffect(() => {
     setShowModal(show);
+    document.body.style.overflow = show ? 'hidden' : 'unset';
   }, [show]);
 
   useEffect(() => {
@@ -144,7 +145,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
       ref={bgModalRef}
       className={getClass({
         'fixed w-full min-h-screen inset-0 bg-gray-900 bg-opacity-50': true,
-        'overflow-y-auto pb-10': showModal,
+        'overflow-y-auto': showModal,
         'gu-modal-background-hide': !showModal && !firstRender,
         hidden: firstRender,
       })}
@@ -153,7 +154,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
         <div className="fixed inset-0 overflow-y-auto">
           <div
             className={getClass({
-              'flex pb-7 justify-center h-full': true,
+              'flex pb-7 justify-center': true,
               'items-center': position === 'center',
               'items-start pt-7': position === 'top',
             })}
