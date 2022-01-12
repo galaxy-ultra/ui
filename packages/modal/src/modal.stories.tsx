@@ -20,9 +20,54 @@ const ModalComponent: Story<ComponentProps<typeof Modal>> = (args: ModalProps) =
 };
 
 export const PrimaryModal = ModalComponent.bind({});
-PrimaryModal.storyName = 'Size MD';
+PrimaryModal.storyName = 'Normal - Size MD';
 PrimaryModal.args = {
   children: <div className='text-justify'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>,
   header: 'Modal Title',
   closeButton: true,
+};
+
+export const SMModal = ModalComponent.bind({});
+SMModal.storyName = 'Size SM';
+SMModal.args = {
+  children: <div className='text-justify'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>,
+  header: 'Modal Title',
+  closeButton: true,
+  size: 'sm'
+};
+
+export const LGModal = ModalComponent.bind({});
+LGModal.storyName = 'Size LG';
+LGModal.args = {
+  children: <div className='text-justify'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>,
+  header: 'Modal Title',
+  closeButton: true,
+  size: 'lg'
+};
+
+export const XLModal = ModalComponent.bind({});
+XLModal.storyName = 'Size XL';
+XLModal.args = {
+  children: <div className='text-justify'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>,
+  header: 'Modal Title',
+  closeButton: true,
+  size: 'xl'
+};
+
+export const PositionCenterModal = ModalComponent.bind({});
+PositionCenterModal.storyName = 'Position Center';
+PositionCenterModal.args = {
+  children: <div className='text-justify'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>,
+  header: 'Modal Title',
+  closeButton: true,
+  position: 'center'
+};
+
+export const CloseOutsideModal = ModalComponent.bind({});
+CloseOutsideModal.storyName = 'Close Outside';
+CloseOutsideModal.args = {
+  children: <div className='text-justify'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>,
+  header: 'Modal Title',
+  closeButton: true,
+  closeOutside: true
 };
