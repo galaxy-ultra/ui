@@ -41,7 +41,7 @@ const ModalHeader: React.FC<ModalHeaderProps> = memo((props) => {
 });
 
 const ModalFooter: React.FC<ModalFooterProps> = memo((props) => {
-  const { footer, onConfirm, onClose, showFooter, cancelTitle, confirmTitle } = props;
+  const { footer, onConfirm, onClose, showFooter, cancelTitle, confirmTitle, showModal } = props;
 
   if (!showFooter) {
     return null;
@@ -54,13 +54,21 @@ const ModalFooter: React.FC<ModalFooterProps> = memo((props) => {
         <div className="mt-4">
           <div className="flex items-center justify-end">
             <button
-              className="px-4 font-medium py-2 duration-300 outline-none rounded-md bg-white hover:bg-gray-50 border border-gray-300"
+              className={getClass({
+                'px-4 font-medium py-2 duration-300 outline-none rounded-md bg-white hover:bg-gray-50 border border-gray-300':
+                  true,
+                'cursor-auto': !showModal,
+              })}
               onClick={onClose}
             >
               {cancelTitle || 'Cancel'}
             </button>
             <button
-              className="px-4 font-medium py-2 duration-300 outline-none rounded-md bg-blue-600 hover:bg-blue-700 text-gray-50 ml-4"
+              className={getClass({
+                'px-4 font-medium py-2 duration-300 outline-none rounded-md bg-blue-600 hover:bg-blue-700 text-gray-50 ml-4':
+                  true,
+                'cursor-auto': !showModal,
+              })}
               onClick={onConfirm}
             >
               {confirmTitle || 'Confirm'}
@@ -85,7 +93,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
     onClose,
     size = 'md',
     children,
-    zIndex = 100,
+    zIndex = 1000,
     header,
     footer,
     closeButton,
@@ -135,53 +143,64 @@ export const Modal: React.FC<ModalProps> = (props) => {
       style={{ zIndex: zIndex }}
       ref={bgModalRef}
       className={getClass({
-        'flex justify-center fixed w-full min-h-screen inset-0 bg-gray-900 bg-opacity-50': true,
+        'fixed w-full min-h-screen inset-0 bg-gray-900 bg-opacity-50': true,
         'overflow-y-auto pb-10': showModal,
         'gu-modal-background-hide': !showModal && !firstRender,
         hidden: firstRender,
-        'items-center': position === 'center',
-        'items-start pt-7': position === 'top',
       })}
     >
-      <div
-        style={{ zIndex: zIndex + 10 }}
-        ref={modalRef}
-        className={getClass({
-          'duration-300 px-5 py-4 rounded-lg shadow-xl bg-white': true,
-          'gu-modal-content-show': showModal,
-          'gu-modal-content-hide': !showModal,
-          'w-11/12 sm:w-6/12 md:w-6/12 lg:w-4/12 xl:w-4/12 2xl:w-4/12': size === 'sm',
-          'w-11/12 sm:w-8/12 md:w-6/12 lg:w-5/12 xl:w-5/12 2xl:w-5/12': size === 'md',
-          'w-11/12 sm:w-9/12 md:w-7/12 lg:w-6/12 xl:w-6/12 2xl:w-6/12': size === 'lg',
-          'w-11/12 sm:w-11/12 md:w-11/12 lg:w-10/12 xl:w-10/12 2xl:w-9/12': size === 'xl',
-        })}
-      >
-        <ModalHeader
-          onClose={() => {
-            setFirstRender(false);
-            onClose();
-          }}
-          header={header}
-          closeButton={closeButton}
-          showHeader={showHeader}
-        />
+      <div className="min-h-screen">
+        <div className="fixed inset-0 overflow-y-auto">
+          <div
+            className={getClass({
+              'flex pb-7 justify-center h-full': true,
+              'items-center': position === 'center',
+              'items-start pt-7': position === 'top',
+            })}
+          >
+            <div
+              style={{ zIndex: zIndex + 10 }}
+              ref={modalRef}
+              className={getClass({
+                'duration-300 px-5 py-4 rounded-lg shadow-xl bg-white': true,
+                'gu-modal-content-show': showModal,
+                'gu-modal-content-hide': !showModal,
+                'w-11/12 sm:w-6/12 md:w-6/12 lg:w-4/12 xl:w-4/12 2xl:w-4/12': size === 'sm',
+                'w-11/12 sm:w-8/12 md:w-6/12 lg:w-5/12 xl:w-5/12 2xl:w-5/12': size === 'md',
+                'w-11/12 sm:w-9/12 md:w-7/12 lg:w-6/12 xl:w-6/12 2xl:w-6/12': size === 'lg',
+                'w-11/12 sm:w-11/12 md:w-11/12 lg:w-10/12 xl:w-10/12 2xl:w-9/12': size === 'xl',
+              })}
+            >
+              <ModalHeader
+                onClose={() => {
+                  setFirstRender(false);
+                  onClose();
+                }}
+                header={header}
+                closeButton={closeButton}
+                showHeader={showHeader}
+              />
 
-        <div className="my-4">{children}</div>
+              <div className="my-4">{children}</div>
 
-        <ModalFooter
-          footer={footer}
-          onClose={() => {
-            setFirstRender(false);
-            onClose();
-          }}
-          onConfirm={() => {
-            setFirstRender(false);
-            onConfirm && onConfirm();
-          }}
-          showFooter={showFooter}
-          confirmTitle={confirmTitle}
-          cancelTitle={cancelTitle}
-        />
+              <ModalFooter
+                footer={footer}
+                onClose={() => {
+                  setFirstRender(false);
+                  onClose();
+                }}
+                onConfirm={() => {
+                  setFirstRender(false);
+                  onConfirm && onConfirm();
+                }}
+                showFooter={showFooter}
+                confirmTitle={confirmTitle}
+                cancelTitle={cancelTitle}
+                showModal={showModal}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

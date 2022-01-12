@@ -31,4 +31,5 @@ export interface ModalFooterProps {
   showFooter?: boolean;
   cancelTitle?: string;
   confirmTitle?: string;
+  showModal?: boolean;
 }
