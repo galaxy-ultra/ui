@@ -130,7 +130,8 @@ export const Modal: React.FC<ModalProps> = (props) => {
 
   useEffect(() => {
     setShowModal(show);
-    document.body.style.overflow = show ? 'hidden' : 'unset';
+    document.body.style.overflow = show ? 'hidden' : '';
+    document.body.style.paddingRight = show ? '17px' : '';
   }, [show]);
 
   useEffect(() => {
