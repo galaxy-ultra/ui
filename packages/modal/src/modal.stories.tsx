@@ -13,7 +13,7 @@ const ModalComponent: Story<ComponentProps<typeof Modal>> = (args: ModalProps) =
 
   return (
     <div>
-      <button onClick={() => setShow(true)} className='px-4 py-2 rounded text-gray-50 bg-green-600 duration-300 hover:bg-green-700'>Open modal</button>
+      <button onClick={() => setShow(true)} className='px-4 block my-10 py-2 rounded text-gray-50 bg-green-600 duration-300 hover:bg-green-700'>Open modal</button>
       <Modal {...args} show={show} onClose={() => setShow(false)} />
     </div>
   )
