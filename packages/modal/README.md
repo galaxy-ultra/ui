@@ -1,18 +1,16 @@
-## `Galaxy Ultra UI`
+## `Galaxy Ultra Modal`
 
 > A UI library for React built with TailwindCSS
 
 ### Install
 
-`npm i @galaxy-ultra/ui`
+`npm i @galaxy-ultra/modal`
 or
-`yarn add @galaxy-ultra/ui`
+`yarn add @galaxy-ultra/modal`
 
 ### Usage
 ```
-import { Component } from @galaxy-ultra/ui
-
-<Component/>
+import Modal from @galaxy-ultra/modal
 ```
 ### Documentation
 See full docs at https://galaxyultra.net
