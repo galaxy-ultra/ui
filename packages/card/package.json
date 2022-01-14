@@ -3,7 +3,6 @@
   "version": "0.0.23",
   "description": "Galaxy UI Card",
   "author": "autoclickvn@gmail.com",
-  "homepage": "",
   "license": "ISC",
   "main": "lib/index.js",
   "module": "lib/index.es.js",
@@ -23,5 +22,10 @@
     "build": "rollup -c",
     "clean": "rm -rf lib",
     "storybook": "start-storybook -p 6006"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/galaxy-ultra/ui.git"
+  },
+  "homepage": "https://galaxyultra.net"
 }

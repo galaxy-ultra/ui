@@ -1,11 +1,18 @@
-# `@galaxy-ultra/ui`
+## `Galaxy Ultra UI`
 
-> TODO: description
+> A UI library for React built with TailwindCSS
 
-## Usage
+### Install
 
+`npm i @galaxy-ultra/ui`
+or
+`yarn add @galaxy-ultra/ui`
+
+### Usage
 ```
-const ui = require('@galaxy-ultra/ui');
+import { Component } from @galaxy-ultra/ui
 
-// TODO: DEMONSTRATE API
+<Component/>
 ```
+### Documentation
+See full docs at https://galaxyultra.net

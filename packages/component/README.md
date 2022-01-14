@@ -1,18 +1,16 @@
-## `Galaxy Ultra UI`
+## `Galaxy Ultra Component`
 
 > A UI library for React built with TailwindCSS
 
 ### Install
 
-`npm i @galaxy-ultra/ui`
+`npm i @galaxy-ultra/component`
 or
-`yarn add @galaxy-ultra/ui`
+`yarn add @galaxy-ultra/component`
 
 ### Usage
 ```
-import { Component } from @galaxy-ultra/ui
-
-<Component/>
+import Component from @galaxy-ultra/component
 ```
 ### Documentation
 See full docs at https://galaxyultra.net
