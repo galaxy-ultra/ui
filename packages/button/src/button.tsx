@@ -2,7 +2,8 @@ import { ButtonProps } from './button.type';
 import { getClass } from './helper';
 
 export const Button: React.FC<ButtonProps> = (props) => {
-  const { variant = 'primary', disabled, children, icon } = props;
+  const { variant = 'primary', disabled, children, icon, ...childProps } = props;
+
   return (
     <button
       disabled={disabled}
@@ -17,6 +18,7 @@ export const Button: React.FC<ButtonProps> = (props) => {
         'bg-white hover:bg-gray-50 border border-gray-200': variant === 'light' && !disabled,
         'bg-gray-500 hover:bg-gray-500 cursor-not-allowed text-gray-50': !!disabled,
       })}
+      {...childProps}
     >
       {((icon && icon.position === 'left') || (icon && !icon.position)) && <div className="mr-1.5">{icon.element}</div>}
       {children}
