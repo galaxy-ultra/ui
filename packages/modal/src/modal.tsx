@@ -1,109 +1,22 @@
-import { memo, RefObject, useEffect, useRef, useState } from 'react';
-import { getClass, getElementType } from './helper';
+import { RefObject, useEffect, useRef, useState } from 'react';
+import { getClass } from './helper';
+import { ModalBody } from './modal.body';
+import Context from './modal.context';
 import './modal.css';
-import { ModalFooterProps, ModalHeaderProps, ModalProps } from './modal.type';
+import { ModalFooter } from './modal.footer';
+import { ModalHeader } from './modal.header';
+import { ModalProps } from './modal.type';
 
-const ModalHeader: React.FC<ModalHeaderProps> = memo((props) => {
-  const { header, closeButton, onClose, showHeader } = props;
-  const headerType = getElementType(header);
-
-  if (!header || !showHeader) {
-    return null;
-  }
-
-  return (
-    <div>
-      <div className="flex items-center justify-between mb-4">
-        <div
-          className={getClass({
-            'font-semibold': headerType === 'string',
-          })}
-        >
-          {header}
-        </div>
-        {closeButton && (
-          <button className="outline-none opacity-50 hover:opacity-80 duration-300" onClick={onClose}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        )}
-      </div>
-      <hr className="opacity-10" />
-    </div>
-  );
-});
-
-const ModalFooter: React.FC<ModalFooterProps> = memo((props) => {
-  const { footer, onConfirm, onClose, showFooter, cancelTitle, confirmTitle, showModal } = props;
-
-  if (!showFooter) {
-    return null;
-  }
-
-  if (!footer) {
-    return (
-      <div>
-        <hr className="opacity-10" />
-        <div className="mt-4">
-          <div className="flex items-center justify-end">
-            <button
-              className={getClass({
-                'px-4 font-medium py-2 duration-300 outline-none rounded-md bg-white hover:bg-gray-50 border border-gray-300':
-                  true,
-                'cursor-auto': !showModal,
-              })}
-              onClick={onClose}
-            >
-              {cancelTitle || 'Cancel'}
-            </button>
-            <button
-              className={getClass({
-                'px-4 font-medium py-2 duration-300 outline-none rounded-md bg-blue-600 hover:bg-blue-700 text-gray-50 ml-4':
-                  true,
-                'cursor-auto': !showModal,
-              })}
-              onClick={onConfirm}
-            >
-              {confirmTitle || 'Confirm'}
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div>
-      <hr className="opacity-10" />
-      <div className="mt-4">{footer}</div>
-    </div>
-  );
-});
-
-export const Modal: React.FC<ModalProps> = (props) => {
+const ModalUI: React.FC<ModalProps> = (props) => {
   const {
     show,
     onClose,
     size = 'md',
     children,
     zIndex = 1000,
-    header,
-    footer,
-    closeButton,
     position = 'top',
     onConfirm,
-    showFooter = true,
-    showHeader = true,
     closeOutside = false,
-    cancelTitle,
-    confirmTitle,
   } = props;
 
   const [firstRender, setFirstRender] = useState<boolean>(true);
@@ -131,13 +44,10 @@ export const Modal: React.FC<ModalProps> = (props) => {
   useEffect(() => {
     setShowModal(show);
 
-    if (show) {
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
-      document.body.style.overflowY = 'scroll';
-    } else {
-      document.body.style.position = '';
+    if (!show) {
       document.body.style.overflowY = 'unset';
+    } else if (document.body.scrollHeight > document.body.clientHeight) {
+      document.body.style.overflowY = 'scroll';
     }
   }, [show]);
 
@@ -148,69 +58,57 @@ export const Modal: React.FC<ModalProps> = (props) => {
   }, [showModal, firstRender]);
 
   return (
-    <div
-      style={{ zIndex: zIndex }}
-      ref={bgModalRef}
-      className={getClass({
-        'fixed w-full min-h-screen inset-0 bg-gray-900 bg-opacity-50': true,
-        'overflow-y-auto': showModal,
-        'gu-modal-background-hide': !showModal && !firstRender,
-        hidden: firstRender,
-      })}
+    <Context.Provider
+      value={{
+        showModal: showModal,
+        onClose: onClose,
+        onConfirm: onConfirm,
+      }}
     >
-      <div className="min-h-screen">
-        <div className="fixed inset-0 overflow-y-auto">
-          <div
-            className={getClass({
-              'flex pb-7 justify-center': true,
-              'items-center': position === 'center',
-              'items-start pt-7': position === 'top',
-            })}
-          >
+      <div
+        style={{ zIndex: zIndex }}
+        ref={bgModalRef}
+        className={getClass({
+          'fixed w-full min-h-screen inset-0 bg-gray-900 bg-opacity-50': true,
+          'overflow-y-auto': showModal,
+          'gu-modal-background-hide': !showModal && !firstRender,
+          hidden: firstRender,
+        })}
+      >
+        <div className="min-h-screen">
+          <div className="fixed inset-0 overflow-y-auto">
             <div
-              style={{ zIndex: zIndex + 10 }}
-              ref={modalRef}
               className={getClass({
-                'duration-300 px-5 py-4 rounded-lg shadow-xl bg-white': true,
-                'gu-modal-content-show': showModal,
-                'gu-modal-content-hide': !showModal,
-                'w-11/12 sm:w-6/12 md:w-6/12 lg:w-4/12 xl:w-4/12 2xl:w-4/12': size === 'sm',
-                'w-11/12 sm:w-8/12 md:w-6/12 lg:w-5/12 xl:w-5/12 2xl:w-5/12': size === 'md',
-                'w-11/12 sm:w-9/12 md:w-7/12 lg:w-6/12 xl:w-6/12 2xl:w-6/12': size === 'lg',
-                'w-11/12 sm:w-11/12 md:w-11/12 lg:w-10/12 xl:w-10/12 2xl:w-9/12': size === 'xl',
+                'flex pb-7 justify-center': true,
+                'items-center': position === 'center',
+                'items-start pt-7': position === 'top',
               })}
             >
-              <ModalHeader
-                onClose={() => {
-                  setFirstRender(false);
-                  onClose();
-                }}
-                header={header}
-                closeButton={closeButton}
-                showHeader={showHeader}
-              />
-
-              <div className="my-4">{children}</div>
-
-              <ModalFooter
-                footer={footer}
-                onClose={() => {
-                  setFirstRender(false);
-                  onClose();
-                }}
-                onConfirm={() => {
-                  setFirstRender(false);
-                  onConfirm && onConfirm();
-                }}
-                showFooter={showFooter}
-                confirmTitle={confirmTitle}
-                cancelTitle={cancelTitle}
-                showModal={showModal}
-              />
+              <div
+                style={{ zIndex: zIndex + 10 }}
+                ref={modalRef}
+                className={getClass({
+                  'duration-300 px-5 py-4 rounded-lg shadow-xl bg-white': true,
+                  'gu-modal-content-show': showModal,
+                  'gu-modal-content-hide': !showModal,
+                  'w-11/12 sm:w-6/12 md:w-6/12 lg:w-4/12 xl:w-4/12 2xl:w-4/12': size === 'sm',
+                  'w-11/12 sm:w-8/12 md:w-6/12 lg:w-5/12 xl:w-5/12 2xl:w-5/12': size === 'md',
+                  'w-11/12 sm:w-9/12 md:w-7/12 lg:w-6/12 xl:w-6/12 2xl:w-6/12': size === 'lg',
+                  'w-11/12 sm:w-11/12 md:w-11/12 lg:w-10/12 xl:w-10/12 2xl:w-9/12': size === 'xl',
+                })}
+              >
+                <div>{children}</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </Context.Provider>
   );
 };
+
+export const Modal = Object.assign(ModalUI, {
+  Header: ModalHeader,
+  Footer: ModalFooter,
+  Body: ModalBody,
+});
