@@ -8,7 +8,11 @@ export default {
   component: Button,
 } as Meta;
 
-const ButtonComponent: Story<ComponentProps<typeof Button>> = (args: ButtonProps) => <Button {...args} />;
+const ButtonComponent: Story<ComponentProps<typeof Button>> = (args: ButtonProps) => {
+  return (
+    <Button {...args} />
+  )
+};
 
 export const PrimaryButton = ButtonComponent.bind({});
 PrimaryButton.storyName = 'Primary';
