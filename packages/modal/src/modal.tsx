@@ -80,7 +80,7 @@ const ModalUI: React.FC<ModalProps> = (props) => {
             <div
               className={getClass({
                 'flex pb-7 justify-center': true,
-                'items-center': position === 'center',
+                'items-center h-full': position === 'center',
                 'items-start pt-7': position === 'top',
               })}
             >
