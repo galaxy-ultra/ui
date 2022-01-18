@@ -16,7 +16,7 @@ const RadioUI: React.FC<RadioProps> = (props) => {
     wrapperClassName,
   } = props;
   const [radioChecked, setRadioChecked] = useState<boolean>(checked);
-  const radioId = makeId(5);
+  const radioId = `gu-radio-${makeId(5)}`;
 
   useEffect(() => {
     setRadioChecked(valueFromGroup === value);
