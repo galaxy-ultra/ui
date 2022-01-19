@@ -28,8 +28,8 @@ const RadioUI: React.FC<RadioProps> = (props) => {
         `${wrapperClassName} ` +
         getClass({
           'flex items-center': !!(
-            label &&
-            (!label.position || label.position === 'left' || label.position === 'right')
+            (label && (!label.position || label.position === 'left' || label.position === 'right')) ||
+            children
           ),
         })
       }
