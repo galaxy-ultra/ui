@@ -1,8 +1,23 @@
-.w-normal {
+.gu-radio-w-small {
+  width: 0.875rem;
+}
+
+.gu-radio-h-small {
+  height: 0.875rem;
+}
+
+.gu-radio-w-normal {
   width: 1.125rem;
 }
 
-.h-normal {
+.gu-radio-h-normal {
   height: 1.125rem;
 }
 
+.gu-radio-w-large {
+  width: 1.375rem;
+}
+
+.gu-radio-h-large {
+  height: 1.375rem;
+}
