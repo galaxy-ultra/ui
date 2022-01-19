@@ -19,7 +19,9 @@ const RadioUI: React.FC<RadioProps> = (props) => {
   const radioId = `gu-radio-${makeId(5)}`;
 
   useEffect(() => {
-    setRadioChecked(valueFromGroup === value);
+    if (valueFromGroup) {
+      setRadioChecked(valueFromGroup === value);
+    }
   }, [valueFromGroup, value]);
 
   return (
