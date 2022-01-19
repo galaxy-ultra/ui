@@ -11,7 +11,7 @@ export default {
 const RadioComponent: Story<ComponentProps<typeof Radio>> = (args: RadioProps) => {
   return (
     <div>
-      <Radio size='small' {...args} />
+      <Radio size='small' {...args} checked />
       <Radio size='normal' {...args} />
       <Radio size='large' {...args} />
     </div>
