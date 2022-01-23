@@ -53,9 +53,9 @@ const RadioUI: React.FC<RadioProps> = (props) => {
         id={radioId}
         type="radio"
         className={getClass({
-          'h-3.5 w-3.5': size === 'small',
-          'h-normal w-normal': size === 'normal',
-          'h-5 w-5': size === 'large',
+          'gu-radio-h-small gu-radio-w-small': size === 'small',
+          'gu-radio-h-normal gu-radio-w-normal': size === 'normal',
+          'gu-radio-h-large gu-radio-w-large': size === 'large',
         })}
         checked={radioChecked}
         onChange={(e) => {
