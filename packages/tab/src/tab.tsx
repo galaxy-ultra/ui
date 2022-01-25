@@ -2,12 +2,20 @@ import { useCallback, useEffect, useState } from 'react';
 import { getClass } from './helper';
 import Context from './tab.context';
 import { TabItem } from './tab.item';
-import { TabProps, Title } from './tab.type';
+import { Data, TabProps } from './tab.type';
 
 const TabUI: React.FC<TabProps> = (props) => {
-  const { defaultActiveKey, activeKey, onChange, children } = props;
+  const {
+    defaultActiveKey,
+    activeKey,
+    onChange,
+    children,
+    position = 'top',
+    separator = true,
+    isWrapper = false,
+  } = props;
 
-  const [dataList, setDataList] = useState<{ title: Title; tabKey?: string }[]>([]);
+  const [dataList, setDataList] = useState<Data[]>([]);
   const [currentKey, setCurrentKey] = useState(defaultActiveKey);
 
   useEffect(() => {
@@ -17,9 +25,8 @@ const TabUI: React.FC<TabProps> = (props) => {
   }, [activeKey]);
 
   const onUpdateTitle = useCallback(
-    (data: { title: Title; tabKey?: string }) => {
+    (data: Data) => {
       const x = dataList.find((item) => item.tabKey === data.tabKey);
-      console.log('ducnh2', dataList, data);
       !x && setDataList([data, ...dataList]);
     },
     [dataList]
@@ -34,23 +41,70 @@ const TabUI: React.FC<TabProps> = (props) => {
         onChangeTab: (newKey?: string) => setCurrentKey(newKey),
       }}
     >
-      <div>
-        {dataList &&
-          dataList.map((item) => {
-            return (
-              <div
-                key={item.tabKey}
-                className={getClass({
-                  'text-red-500': currentKey === item.tabKey,
-                })}
-                onClick={() => setCurrentKey(item.tabKey)}
-              >
-                {item.title}
-              </div>
-            );
+      <div
+        className={getClass({
+          'flex items-start justify-between': position === 'left' || position === 'right',
+        })}
+      >
+        {position === 'bottom' && <div className="mb-5">{children}</div>}
+        {position === 'right' && <div className="mr-5 w-full">{children}</div>}
+
+        <ul
+          className={getClass({
+            'border-r': position === 'left',
+            'flex items-center flex-wrap border-b': position === 'top',
+            'flex items-center flex-wrap border-t': position === 'bottom',
+            'border-l': position === 'right',
+            'border-none': !separator,
           })}
+        >
+          {dataList &&
+            dataList.map((item, index) => {
+              return (
+                <li
+                  className={getClass({
+                    'border-b-2 mr-7': position === 'top' && !isWrapper,
+                    'border-t-2 mr-7': position === 'bottom' && !isWrapper,
+                    'border-r-2 mb-3': position === 'left' && !isWrapper,
+                    'border-l-2 mb-3': position === 'right' && !isWrapper,
+                    'border-blue-500 text-blue-600': currentKey === item.tabKey && !isWrapper,
+                    'text-gray-700 border-white hover:text-blue-600':
+                      currentKey !== item.tabKey && !isWrapper && !item.disabled,
+                    'text-gray-700 border-white': currentKey !== item.tabKey && !isWrapper && !!item.disabled,
+                    'border rounded-t-sm relative top-px': !!isWrapper,
+                    'border-r': !!isWrapper && index === dataList.length - 1,
+                    'border-r-0': !!isWrapper && index !== dataList.length - 1,
+                    'border-b-white': position === 'top' && currentKey === item.tabKey && !!isWrapper,
+                    'text-blue-600': currentKey === item.tabKey && !!isWrapper,
+                    'bg-gray-50': currentKey !== item.tabKey && !!isWrapper,
+                  })}
+                  key={item.tabKey}
+                  onClick={() => {
+                    if (item.disabled) {
+                      return;
+                    }
+                    setCurrentKey(item.tabKey);
+                  }}
+                >
+                  <button
+                    className={getClass({
+                      'outline-none whitespace-nowrap': true,
+                      'opacity-20': !!item.disabled,
+                      'py-2 px-3': position === 'top' || position === 'bottom',
+                      'py-2.5 pl-3 pr-4': position === 'left' || position === 'right',
+                      'py-2 px-5': !!isWrapper,
+                    })}
+                  >
+                    {item.title}
+                  </button>
+                </li>
+              );
+            })}
+        </ul>
+
+        {position === 'top' && <div className="mt-5">{children}</div>}
+        {position === 'left' && <div className="ml-5 w-full">{children}</div>}
       </div>
-      <div className="mt-5">{children}</div>
     </Context.Provider>
   );
 };

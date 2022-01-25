@@ -1,14 +1,11 @@
 import { createContext } from 'react';
-import { Title } from './tab.type';
+import { Data } from './tab.type';
 
 export type ContextType = {
   activeKey?: string;
   onChange?: (key: string) => void;
-  dataList?: {
-    title: Title;
-    tabKey?: string;
-  }[];
-  onUpdateTitle?: (data: { title: Title; tabKey?: string }) => void;
+  dataList?: Data[];
+  onUpdateTitle?: (data: Data) => void;
   onChangeTab?: (tabKey?: string) => void;
 };
 
