@@ -23,6 +23,7 @@
     "clean": "rm -rf lib"
   },
   "dependencies": {
+    "@galaxy-ultra/tab": "^0.0.27",
     "@galaxy-ultra/alert": "^0.0.31",
     "@galaxy-ultra/breadcrumb": "^0.0.31",
     "@galaxy-ultra/button": "^0.0.31",
