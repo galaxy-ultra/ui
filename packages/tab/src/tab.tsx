@@ -71,10 +71,20 @@ const TabUI: React.FC<TabProps> = (props) => {
                     'text-gray-700 border-white hover:text-blue-600':
                       currentKey !== item.tabKey && !isWrapper && !item.disabled,
                     'text-gray-700 border-white': currentKey !== item.tabKey && !isWrapper && !!item.disabled,
-                    'border rounded-t-sm relative top-px': !!isWrapper,
+                    'border rounded-t-sm relative': !!isWrapper,
+                    'top-px': !!isWrapper && position === 'top',
+                    '-top-px': !!isWrapper && position === 'bottom',
+                    '-right-px': !!isWrapper && position === 'left',
+                    'right-px': !!isWrapper && position === 'right',
                     'border-r': !!isWrapper && index === dataList.length - 1,
-                    'border-r-0': !!isWrapper && index !== dataList.length - 1,
+                    'border-r-0':
+                      !!isWrapper && index !== dataList.length - 1 && (position === 'bottom' || position === 'top'),
+                    'border-b-0':
+                      !!isWrapper && index !== dataList.length - 1 && (position === 'left' || position === 'right'),
                     'border-b-white': position === 'top' && currentKey === item.tabKey && !!isWrapper,
+                    'border-t-white': position === 'bottom' && currentKey === item.tabKey && !!isWrapper,
+                    'border-r-white': position === 'left' && currentKey === item.tabKey && !!isWrapper,
+                    'border-l-white': position === 'right' && currentKey === item.tabKey && !!isWrapper,
                     'text-blue-600': currentKey === item.tabKey && !!isWrapper,
                     'bg-gray-50': currentKey !== item.tabKey && !!isWrapper,
                   })}

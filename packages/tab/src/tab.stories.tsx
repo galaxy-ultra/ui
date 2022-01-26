@@ -45,5 +45,5 @@ NoSeparatorComponent.args = {
 export const WrapperComponent = TabComponent.bind({});
 WrapperComponent.storyName = 'Wrapper';
 WrapperComponent.args = {
-  isWrapper: true
+  isWrapper: true,
 };
