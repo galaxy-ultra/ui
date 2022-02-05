@@ -16,7 +16,7 @@ export const SkeletonCircle: React.FC<SkeletonCircleProps> = (props) => {
       }}
       className={getClass({
         'inline-block relative overflow-hidden rounded-full': true,
-        'gu-skeleton-square': !!animate,
+        'gu-skeleton-circle': !!animate,
         'w-full h-full': !size,
       })}
     />
