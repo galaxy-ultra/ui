@@ -31,7 +31,8 @@
     "@galaxy-ultra/loading": "^0.0.31",
     "@galaxy-ultra/modal": "^0.0.31",
     "@galaxy-ultra/radio": "^0.0.31",
-    "@galaxy-ultra/switch": "^0.0.31"
+    "@galaxy-ultra/switch": "^0.0.31",
+    "@galaxy-ultra/skeleton": "^0.0.31"
   },
   "devDependencies": {
     "@types/react-dom": "^17.0.7"
