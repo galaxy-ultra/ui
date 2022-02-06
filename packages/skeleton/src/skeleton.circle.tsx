@@ -4,7 +4,7 @@ import Context from './skeleton.context';
 import { SkeletonCircleProps } from './skeleton.type';
 
 export const SkeletonCircle: React.FC<SkeletonCircleProps> = (props) => {
-  const { size = 50, backgroundColor = '#E6E6E6' } = props;
+  const { size = 50, backgroundColor = '#E6E6E6', className = '', style } = props;
   const { animate } = useContext(Context);
 
   return (
@@ -13,12 +13,16 @@ export const SkeletonCircle: React.FC<SkeletonCircleProps> = (props) => {
         height: size,
         width: size,
         backgroundColor,
+        ...style,
       }}
-      className={getClass({
-        'inline-block relative overflow-hidden rounded-full': true,
-        'gu-skeleton-circle': !!animate,
-        'w-full h-full': !size,
-      })}
+      className={
+        `${className} ` +
+        getClass({
+          'relative overflow-hidden rounded-full': true,
+          'gu-skeleton-circle': !!animate,
+          'w-full h-full': !size,
+        })
+      }
     />
   );
 };

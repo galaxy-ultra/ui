@@ -7,8 +7,14 @@ import { SkeletonSquare } from './skeleton.square';
 import { SkeletonProps } from './skeleton.type';
 
 const SkeletonUI: React.FC<SkeletonProps> = (props) => {
-  const { children, animate = true } = props;
-  return <Context.Provider value={{ animate }}>{children}</Context.Provider>;
+  const { children, animate = true, className = '', style } = props;
+  return (
+    <Context.Provider value={{ animate }}>
+      <div className={className} style={style}>
+        {children}
+      </div>
+    </Context.Provider>
+  );
 };
 
 export const Skeleton = Object.assign(SkeletonUI, {

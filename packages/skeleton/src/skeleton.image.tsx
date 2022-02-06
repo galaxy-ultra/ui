@@ -4,7 +4,14 @@ import Context from './skeleton.context';
 import { SkeletonImageProps } from './skeleton.type';
 
 export const SkeletonImage: React.FC<SkeletonImageProps> = (props) => {
-  const { width = '8rem', height = '6rem', rounded = 'sm', backgroundColor = '#E6E6E6' } = props;
+  const {
+    width = '8rem',
+    height = '6rem',
+    borderRadius = 5,
+    backgroundColor = '#E6E6E6',
+    className = '',
+    style,
+  } = props;
   const { animate } = useContext(Context);
 
   return (
@@ -13,17 +20,17 @@ export const SkeletonImage: React.FC<SkeletonImageProps> = (props) => {
         height,
         width,
         backgroundColor,
+        borderRadius,
+        ...style,
       }}
-      className={getClass({
-        'relative overflow-hidden flex items-center justify-center': true,
-        'gu-skeleton-image': !!animate,
-        'w-full': !width,
-        'rounded-sm': rounded === 'sm',
-        'rounded-md': rounded === 'md',
-        'rounded-lg': rounded === 'lg',
-        'rounded-xl': rounded === 'xl',
-        'rounded-full': rounded === 'full',
-      })}
+      className={
+        `${className} ` +
+        getClass({
+          'relative overflow-hidden flex items-center justify-center': true,
+          'gu-skeleton-image': !!animate,
+          'w-full': !width,
+        })
+      }
     >
       <svg viewBox="0 0 1098 1024" xmlns="http://www.w3.org/2000/svg" className="w-1/2 h-1/2">
         <path
