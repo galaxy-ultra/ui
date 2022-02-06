@@ -4,21 +4,14 @@ import Context from './skeleton.context';
 import { SkeletonLineProps } from './skeleton.type';
 
 export const SkeletonLine: React.FC<SkeletonLineProps> = (props) => {
-  const {
-    width = '5rem',
-    height = '1rem',
-    borderRadius = 5,
-    backgroundColor = '#E6E6E6',
-    className = '',
-    style,
-  } = props;
+  const { width, height, borderRadius = 5, backgroundColor = '#E6E6E6', className = '', style } = props;
   const { animate } = useContext(Context);
 
   return (
     <div
       style={{
-        height,
-        width,
+        height: height || '1rem',
+        width: width || '5rem',
         backgroundColor,
         borderRadius,
         ...style,
