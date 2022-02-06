@@ -10,8 +10,8 @@ export const SkeletonCircle: React.FC<SkeletonCircleProps> = (props) => {
   return (
     <div
       style={{
-        height: size || 50,
-        width: size || 50,
+        width: size && size !== 'full' ? size : size !== 'full' ? 50 : undefined,
+        height: size && size !== 'full' ? size : size !== 'full' ? 50 : undefined,
         backgroundColor,
         ...style,
       }}
@@ -20,7 +20,7 @@ export const SkeletonCircle: React.FC<SkeletonCircleProps> = (props) => {
         getClass({
           'relative overflow-hidden rounded-full': true,
           'gu-skeleton-circle': !!animate,
-          'w-full h-full': !size,
+          'w-full h-full': size === 'full',
         })
       }
     />

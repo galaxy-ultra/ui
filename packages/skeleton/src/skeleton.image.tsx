@@ -10,8 +10,8 @@ export const SkeletonImage: React.FC<SkeletonImageProps> = (props) => {
   return (
     <div
       style={{
-        height: height || '3rem',
-        width: width || '4rem',
+        height: height && height !== 'full' ? height : height !== 'full' ? '3rem' : undefined,
+        width: width && width !== 'full' ? width : width !== 'full' ? '4rem' : undefined,
         backgroundColor,
         borderRadius,
         ...style,
@@ -21,8 +21,8 @@ export const SkeletonImage: React.FC<SkeletonImageProps> = (props) => {
         getClass({
           'relative overflow-hidden flex items-center justify-center': true,
           'gu-skeleton-image': !!animate,
-          'w-full': !width,
-          'h-full': !height,
+          'w-full': width === 'full',
+          'h-full': height === 'full',
         })
       }
     >
