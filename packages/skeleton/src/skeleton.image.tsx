@@ -4,21 +4,14 @@ import Context from './skeleton.context';
 import { SkeletonImageProps } from './skeleton.type';
 
 export const SkeletonImage: React.FC<SkeletonImageProps> = (props) => {
-  const {
-    width = '8rem',
-    height = '6rem',
-    borderRadius = 5,
-    backgroundColor = '#E6E6E6',
-    className = '',
-    style,
-  } = props;
+  const { width, height, borderRadius = 5, backgroundColor = '#E6E6E6', className = '', style } = props;
   const { animate } = useContext(Context);
 
   return (
     <div
       style={{
-        height,
-        width,
+        height: height || '3rem',
+        width: width || '4rem',
         backgroundColor,
         borderRadius,
         ...style,
@@ -29,6 +22,7 @@ export const SkeletonImage: React.FC<SkeletonImageProps> = (props) => {
           'relative overflow-hidden flex items-center justify-center': true,
           'gu-skeleton-image': !!animate,
           'w-full': !width,
+          'h-full': !height,
         })
       }
     >

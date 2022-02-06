@@ -4,14 +4,14 @@ import Context from './skeleton.context';
 import { SkeletonCircleProps } from './skeleton.type';
 
 export const SkeletonCircle: React.FC<SkeletonCircleProps> = (props) => {
-  const { size = 50, backgroundColor = '#E6E6E6', className = '', style } = props;
+  const { size, backgroundColor = '#E6E6E6', className = '', style } = props;
   const { animate } = useContext(Context);
 
   return (
     <div
       style={{
-        height: size,
-        width: size,
+        height: size || 50,
+        width: size || 50,
         backgroundColor,
         ...style,
       }}
