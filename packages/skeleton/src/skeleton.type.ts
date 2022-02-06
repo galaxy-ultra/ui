@@ -7,8 +7,8 @@ export interface SkeletonProps {
 }
 
 export interface SkeletonLineProps {
-  width?: number | string;
-  height?: number | string;
+  width?: number | 'full' | string;
+  height?: number | 'full' | string;
   borderRadius?: number;
   backgroundColor?: string;
   className?: string;
@@ -16,8 +16,8 @@ export interface SkeletonLineProps {
 }
 
 export interface SkeletonImageProps {
-  width?: number | string;
-  height?: number | string;
+  width?: number | 'full' | string;
+  height?: number | 'full' | string;
   borderRadius?: number;
   backgroundColor?: string;
   className?: string;
@@ -25,7 +25,7 @@ export interface SkeletonImageProps {
 }
 
 export interface SkeletonSquareProps {
-  size?: number | string;
+  size?: number | 'full' | string;
   borderRadius?: number;
   backgroundColor?: string;
   className?: string;
@@ -33,7 +33,7 @@ export interface SkeletonSquareProps {
 }
 
 export interface SkeletonCircleProps {
-  size?: number | string;
+  size?: number | 'full' | string;
   backgroundColor?: string;
   className?: string;
   style?: CSSProperties;

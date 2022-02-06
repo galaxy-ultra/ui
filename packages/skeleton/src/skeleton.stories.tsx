@@ -9,7 +9,7 @@ export default {
 } as Meta;
 
 const SkeletonLineComponent: Story<ComponentProps<typeof Skeleton>> = (args: SkeletonProps) => <Skeleton {...args}>
-  <div className='w-40'><Skeleton.Line /></div>
+  <div className='w-40'><Skeleton.Line width="full" /></div>
   <div className='mt-3'><Skeleton.Line width={300} /></div>
 </Skeleton>;
 

@@ -10,8 +10,8 @@ export const SkeletonLine: React.FC<SkeletonLineProps> = (props) => {
   return (
     <div
       style={{
-        height: height || '1rem',
-        width: width || '5rem',
+        height: height && height !== 'full' ? height : height !== 'full' ? '1rem' : undefined,
+        width: width && width !== 'full' ? width : width !== 'full' ? '5rem' : undefined,
         backgroundColor,
         borderRadius,
         ...style,
@@ -21,7 +21,8 @@ export const SkeletonLine: React.FC<SkeletonLineProps> = (props) => {
         getClass({
           'relative overflow-hidden': true,
           'gu-skeleton-line': !!animate,
-          'w-full': !width,
+          'w-full': width === 'full',
+          'h-full': height === 'full',
         })
       }
     />

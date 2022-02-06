@@ -10,8 +10,8 @@ export const SkeletonSquare: React.FC<SkeletonSquareProps> = (props) => {
   return (
     <div
       style={{
-        height: size || 50,
-        width: size || 50,
+        height: size && size !== 'full' ? size : size !== 'full' ? 50 : undefined,
+        width: size && size !== 'full' ? size : size !== 'full' ? 50 : undefined,
         backgroundColor,
         borderRadius,
         ...style,
@@ -21,7 +21,7 @@ export const SkeletonSquare: React.FC<SkeletonSquareProps> = (props) => {
         getClass({
           'relative overflow-hidden': true,
           'gu-skeleton-square': !!animate,
-          'w-full h-full': !size,
+          'w-full h-full': size === 'full',
         })
       }
     />
